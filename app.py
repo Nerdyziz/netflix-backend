@@ -10,7 +10,7 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 
-# Load dataset
+
 df = pd.read_csv("netflix_titles.csv")
 
 # Clean up
@@ -22,7 +22,7 @@ df['date_added'] = pd.to_datetime(df['date_added'], errors='coerce')
 df['duration_num'] = df['duration'].str.extract(r'(\d+)').astype(float)
 df['duration_type'] = np.where(df['duration'].str.contains('Season', case=False, na=False), 'Seasons', 'Minutes')
 
-# Helper function to convert matplotlib figure → Base64
+# Helper function to convert matplotlib figure to string
 def fig_to_base64():
     buf = io.BytesIO()
     plt.savefig(buf, format='png', bbox_inches='tight')
